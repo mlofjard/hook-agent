@@ -11,7 +11,7 @@ RUN         curl -L --silent -o webhook.tar.gz https://github.com/adnanh/webhook
 RUN         go get -d -v
 RUN         CGO_ENABLED=0 go build -ldflags="-s -w" -o /usr/local/bin/webhook
 
-FROM        base as deploy
+FROM        docker.io/node:22.13.0-alpine3.21 as deploy
 COPY        --from=build /usr/local/bin/webhook /usr/local/bin/webhook
 RUN         apk add git
 WORKDIR     /etc/webhook
